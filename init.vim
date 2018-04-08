@@ -19,6 +19,7 @@ call dein#add('Shougo/deoplete.nvim')
 call dein#add('flazz/vim-colorschemes')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+call dein#add('airblade/vim-gitgutter')
 
 if dein#check_install()
     call dein#install()
@@ -111,6 +112,7 @@ set scrolloff=5
 set background=dark
 set hlsearch "highlight search
 set incsearch
+set updatetime=100
 set ignorecase smartcase "ignore case when searching
 set wrapscan "search from top when hit bottom
 set cursorline
