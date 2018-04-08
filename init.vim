@@ -77,11 +77,11 @@ map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabm<cr>
-map <leader>fi :Files<cr>
-map <leader>tt :GFiles?<cr>
+map <leader>fi :GFiles<cr>
+map <leader>gs :GFiles?<cr>
 map <leader>w  :w<cr>
 map <leader>hh :History<cr>
-
+map <leader>rg :Rg<cr>
 
 " Set terminals to split below and right
 set splitbelow
@@ -93,12 +93,12 @@ set splitright
 " :help last-position-jump
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-map <Leader>b :CtrlPBuffer<CR>
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v\c(node_modules|_build|deps|vendor|\.git|\.svn)$',
-    \ 'file': '\v\c\.(swf|bak|png|gif|mov|ico|jpg|pdf|jrxml)$',
-    \}
+" map <Leader>b :CtrlPBuffer<CR>
+" let g:ctrlp_working_path_mode = 0
+" let g:ctrlp_custom_ignore = {
+"     \ 'dir':  '\v\c(node_modules|_build|deps|vendor|\.git|\.svn)$',
+"     \ 'file': '\v\c\.(swf|bak|png|gif|mov|ico|jpg|pdf|jrxml)$',
+"     \}
 
 set guifont=Fira\ Code\Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 13
 
@@ -121,6 +121,15 @@ let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
+
+" Setup for ripgrep
+" Require ripgrep is installed
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=never --smart-case --ignore-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 " Autoformat Elixir files on save
 autocmd BufWritePost *.exs silent :!mix format %
