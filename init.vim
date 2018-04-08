@@ -82,7 +82,12 @@ map <leader>gs :GFiles?<cr>
 map <leader>w  :w<cr>
 map <leader>hh :History<cr>
 map <leader>rg :Rg<cr>
-
+map <leader>ok :noh<cr>
+map <leader>j :m .+1<CR>==
+map <leader>k :m .-2<CR>==
+noremap J 25j
+noremap K 25k
+" type <C-v> then <C-d> to produce ^D
 " Set terminals to split below and right
 set splitbelow
 set splitright
@@ -120,7 +125,7 @@ set termguicolors     " enable true colors support
 let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+colorscheme gruvbox
 
 " Setup for ripgrep
 " Require ripgrep is installed
