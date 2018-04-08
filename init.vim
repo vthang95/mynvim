@@ -1,5 +1,6 @@
 set nocompatible
-filetype off
+filetype on 
+filetype plugin on
 
 set runtimepath+=~/.nvim/dein/repos/github.com/Shougo/dein.vim
 
@@ -12,6 +13,7 @@ call dein#add('Shougo/neosnippet-snippets')
 call dein#add('tpope/vim-fugitive')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
+call dein#add('SirVer/ultisnips')
 call dein#add('mklabs/split-term.vim')
 call dein#add('Lokaltog/powerline-fonts')
 call dein#add('slashmili/alchemist.vim')
@@ -21,6 +23,9 @@ call dein#add('flazz/vim-colorschemes')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('airblade/vim-gitgutter')
+call dein#add('pangloss/vim-javascript')
+call dein#add('moll/vim-node')
+call dein#add('jelera/vim-javascript-syntax')
 
 if dein#check_install()
     call dein#install()
@@ -33,8 +38,16 @@ filetype plugin indent on
 
 let mapleader = " "
 
+" Js
+let g:javascript_plugin_jsdoc = 1
+
 " Deoplete Conf
 let g:deoplete#enable_at_startup = 1
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Alchemist Config
 let g:alchemist_iex_term_size = 30
