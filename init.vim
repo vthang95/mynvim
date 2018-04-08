@@ -15,6 +15,7 @@ call dein#add('vim-airline/vim-airline-themes')
 call dein#add('mklabs/split-term.vim')
 call dein#add('Lokaltog/powerline-fonts')
 call dein#add('slashmili/alchemist.vim')
+call dein#add('scrooloose/nerdtree')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('flazz/vim-colorschemes')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
@@ -39,13 +40,22 @@ let g:deoplete#enable_at_startup = 1
 let g:alchemist_iex_term_size = 30
 let g:alchemist_tag_disable = 1
 
+" NERDtree config
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 20
+let NERDTreeMinimalUI=1
+
 "Airline Config
 let g:airline_powerline_fonts = 1
 set hidden
 let g:Powerline_symbols = 'fancy'
 let g:airline_left_alt_sep = ''
 let g:airline_right_alt_sep = ''
-let g:airline_theme='ayu_mirage'
+let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#show_buffers = 0
@@ -77,17 +87,26 @@ map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabm<cr>
-map <leader>fi :GFiles<cr>
+map <leader>gf :GFiles<cr>
 map <leader>gs :GFiles?<cr>
 map <leader>w  :w<cr>
+map <leader>wq :wqa<cr>
 map <leader>hh :History<cr>
 map <leader>rg :Rg<cr>
+" Open NERDTree
+map <leader>\ :NERDTreeToggle<CR>
+" Focus on NERDTree
+map <leader>, <C-w><left>
+" Blur NERDTree
+map <leader>. <C-w><right>
+" Remove search highlight
 map <leader>ok :noh<cr>
-map <leader>j :m .+1<CR>==
-map <leader>k :m .-2<CR>==
-noremap J 25j
-noremap K 25k
-" type <C-v> then <C-d> to produce ^D
+map <leader>j :m .+1<cr>==
+map <leader>k :m .-2<cr>==
+" jump to the first non-blank character of the line
+map < ^
+" jump to the end of the line
+map > $
 " Set terminals to split below and right
 set splitbelow
 set splitright
@@ -131,7 +150,7 @@ colorscheme gruvbox
 " Require ripgrep is installed
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=never --smart-case --ignore-case '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --smart-case --color=never --ignore-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
