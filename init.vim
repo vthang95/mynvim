@@ -19,6 +19,7 @@ call dein#add('Lokaltog/powerline-fonts')
 call dein#add('slashmili/alchemist.vim')
 call dein#add('scrooloose/nerdtree')
 call dein#add('Shougo/deoplete.nvim')
+call dein#add('ervandew/supertab')
 call dein#add('flazz/vim-colorschemes')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
@@ -43,6 +44,10 @@ let g:javascript_plugin_jsdoc = 1
 
 " Deoplete Conf
 let g:deoplete#enable_at_startup = 1
+
+" Supertab
+autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>" 
+set completeopt-=preview 
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
