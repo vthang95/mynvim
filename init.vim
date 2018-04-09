@@ -2,6 +2,10 @@ set nocompatible
 filetype on 
 filetype plugin on
 
+if (!isdirectory(expand("$HOME/.nvim/dein/repos/github.com/Shougo/dein.vim")))
+  call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.nvim/dein/repos/github.com/Shougo/dein.vim"))
+endif
+
 set runtimepath+=~/.nvim/dein/repos/github.com/Shougo/dein.vim
 
 call dein#begin('~/.nvim/dein/')
