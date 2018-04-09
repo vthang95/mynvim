@@ -119,9 +119,13 @@ map <leader>, <C-w><left>
 map <leader>. <C-w><right>
 " Remove search highlight
 map <leader>ok :noh<cr>
-map <leader>j :m .+1<cr>==
-map <leader>k :m .-2<cr>==
+map <leader>j  :m .+1<cr>==
+map <leader>k  :m .-2<cr>==
 " jump to the first non-blank character of the line
+map <leader>hs :split<cr>
+map <leader>qs <C-w>q<cr>
+map <leader><leader>k <C-w><up>
+map <leader><leader>j <C-w><down>
 map < ^
 " jump to the end of the line
 map > $
