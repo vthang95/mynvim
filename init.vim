@@ -23,7 +23,9 @@ call dein#add('Lokaltog/powerline-fonts')
 call dein#add('slashmili/alchemist.vim')
 call dein#add('scrooloose/nerdtree')
 call dein#add('Shougo/deoplete.nvim')
+call dein#add('Xuyuanp/nerdtree-git-plugin')
 call dein#add('ervandew/supertab')
+call dein#add('chriskempson/base16-vim')
 call dein#add('flazz/vim-colorschemes')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
@@ -48,10 +50,13 @@ let g:javascript_plugin_jsdoc = 1
 
 " Deoplete Conf
 let g:deoplete#enable_at_startup = 1
+set completeopt-=preview 
+let g:deoplete#enable_smart_case = 1
+inoremap <silent><expr><cr> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 
 " Supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>" 
-set completeopt-=preview 
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -60,7 +65,14 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Alchemist Config
 let g:alchemist_iex_term_size = 30
-let g:alchemist_tag_disable = 1
+let g:alchemist_tag_disable = 0
+let g:alchemist_mappings_disable = 1
+let g:alchemist_tag_disable = '<C-9>'
+let g:alchemist_compile_basepath = "/app/"
+let g:alchemist_tag_map = '<C-]>'
+let g:alchemist_tag_stack_map = '<C-T>'
+" autocmd FileType elixir nmap <buffer> gd <c-]>
+" let g:alchemist#elixir_erlang_src = "/usr/local/share/src"
 
 " NERDtree config
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -85,6 +97,7 @@ let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 
+" "tmap <ESC> <C-\><C-n>
 tmap <leader>1  <C-\><C-n><Plug>AirlineSelectTab1
 tmap <leader>2  <C-\><C-n><Plug>AirlineSelectTab2
 tmap <leader>3  <C-\><C-n><Plug>AirlineSelectTab3
@@ -105,18 +118,24 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
+map <leader>tn :tabnew<cr>:GFiles<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabm<cr>
 map <leader>gf :GFiles<cr>
+map <leader>ff :Files<space>
 map <leader>gs :GFiles?<cr>
 map <leader>w  :w<cr>
 map <leader>wq :wqa<cr>
 map <leader>hh :History<cr>
 map <leader>rg :Rg<cr>
+map <leader>ll :Lines<cr>
+map <leader>gd :Gdiff<cr>
+map <leader>ed :ExDoc<space>
+map <leader>iex :IEx<cr>
 " Open NERDTree
 map <leader>\ :NERDTreeToggle<CR>
+
 " Focus on NERDTree
 map <leader>, <C-w><left>
 " Blur NERDTree
@@ -125,14 +144,51 @@ map <leader>. <C-w><right>
 map <leader>ok :noh<cr>
 map <leader>j  :m .+1<cr>==
 map <leader>k  :m .-2<cr>==
-" jump to the first non-blank character of the line
 map <leader>hs :split<cr>
+map <leader>vs :vsplit<cr>
 map <leader>qs <C-w>q<cr>
-map <leader><leader>k <C-w><up>
-map <leader><leader>j <C-w><down>
+map <leader><up> <C-w><up>
+map <leader><down> <C-w><down>
+map <leader><left> <C-w><left>
+map <leader><right> <C-w><right>
+
+" jump to the first non-blank character of the line
 map < ^
 " jump to the end of the line
 map > $
+" Move code block
+vnoremap <leader>k :m '<-2<cr>gv=gv
+vnoremap <leader>j :m '>+1<cr>gv=gv
+vnoremap <leader>md :m '>+1<CR>gv=gv
+vnoremap <leader>mu :m '<-2<CR>gv=gv
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+vmap # :s/^/# /g<CR>:let @/ = ""<CR>
+map # :s/^/# /g<CR>:let @/ = ""<CR>
+map <leader>'/ :s/^/" /g<CR>:let @/ = ""<CR>
+vmap <leader>'/ :s/^/" /g<CR>:let @/ = ""<CR>
+
+inoremap <S-Tab> <C-d>
+nnoremap <S-Tab> <<
+nnoremap <Tab> >>
+
+map <S-k> 5k
+map <S-j> 5j 
+map <S-h> <S-left>
+map <S-l> <S-right>
+
+inoremap        (  ()<Left>
+inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+inoremap        {  {}<Left>
+inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
+
+inoremap ' ''<Left>
+inoremap " ""<Left>
+
+inoremap [ []<Left>
+inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
+
 " Set terminals to split below and right
 set splitbelow
 set splitright
