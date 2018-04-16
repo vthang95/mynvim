@@ -17,16 +17,17 @@ call dein#add('Shougo/neosnippet-snippets')
 call dein#add('tpope/vim-fugitive')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
-call dein#add('SirVer/ultisnips')
-call dein#add('mklabs/split-term.vim')
-call dein#add('Lokaltog/powerline-fonts')
+" "call dein#add('SirVer/ultisnips')
+" "call dein#add('mklabs/split-term.vim')
+" "call dein#add('Lokaltog/powerline-fonts')
+" call dein#add('Yggdroot/indentLine')
 call dein#add('slashmili/alchemist.vim')
 call dein#add('scrooloose/nerdtree')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('Xuyuanp/nerdtree-git-plugin')
 call dein#add('ervandew/supertab')
 call dein#add('chriskempson/base16-vim')
-call dein#add('flazz/vim-colorschemes')
+" "call dein#add('flazz/vim-colorschemes')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('airblade/vim-gitgutter')
@@ -49,8 +50,8 @@ let mapleader = " "
 let g:javascript_plugin_jsdoc = 1
 
 " Deoplete Conf
-let g:deoplete#enable_at_startup = 1
 set completeopt-=preview 
+let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 inoremap <silent><expr><cr> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 
@@ -59,9 +60,9 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>" 
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Alchemist Config
 let g:alchemist_iex_term_size = 30
@@ -71,8 +72,7 @@ let g:alchemist_tag_disable = '<C-9>'
 let g:alchemist_compile_basepath = "/app/"
 let g:alchemist_tag_map = '<C-]>'
 let g:alchemist_tag_stack_map = '<C-T>'
-" autocmd FileType elixir nmap <buffer> gd <c-]>
-" let g:alchemist#elixir_erlang_src = "/usr/local/share/src"
+let g:alchemist#elixir_erlang_src = "/usr/local/Cellar"
 
 " NERDtree config
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -151,6 +151,8 @@ map <leader><up> <C-w><up>
 map <leader><down> <C-w><down>
 map <leader><left> <C-w><left>
 map <leader><right> <C-w><right>
+map + :vertical resize +5<cr>
+map _ :vertical resize -5<cr>
 
 " jump to the first non-blank character of the line
 map < ^
@@ -229,7 +231,6 @@ let ayucolor="dark"   " for dark version of theme
 colorscheme gruvbox
 
 " Setup for ripgrep
-" Require ripgrep is installed
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --smart-case --color=never --ignore-case '.shellescape(<q-args>), 1,
