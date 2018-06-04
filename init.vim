@@ -82,6 +82,7 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 20
 let NERDTreeMinimalUI=1
+let NERDTreeIgnore = ['\.beam$']
 
 "Airline Config
 let g:airline_powerline_fonts = 1
@@ -228,7 +229,7 @@ set termguicolors     " enable true colors support
 let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 let ayucolor="dark"   " for dark version of theme
-colorscheme gruvbox
+colorscheme base16-google-dark 
 
 " Setup for ripgrep
 command! -bang -nargs=* Rg
