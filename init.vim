@@ -148,6 +148,7 @@ map <leader>k  :m .-2<cr>==
 map <leader>hs :split<cr>
 map <leader>vs :vsplit<cr>
 map <leader>qs <C-w>q<cr>
+map <leader>fh :BTags<cr>
 map <leader><up> <C-w><up>
 map <leader><down> <C-w><down>
 map <leader><left> <C-w><left>
@@ -166,6 +167,7 @@ vnoremap <leader>md :m '>+1<CR>gv=gv
 vnoremap <leader>mu :m '<-2<CR>gv=gv
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
+vnoremap d "_d
 
 vmap # :s/^/# /g<CR>:let @/ = ""<CR>
 map # :s/^/# /g<CR>:let @/ = ""<CR>
@@ -175,9 +177,13 @@ vmap <leader>'/ :s/^/" /g<CR>:let @/ = ""<CR>
 inoremap <S-Tab> <C-d>
 nnoremap <S-Tab> <<
 nnoremap <Tab> >>
+nnoremap xx dd
+nnoremap dd "_dd
+nnoremap fw dw
+nnoremap dw "_dw
 
-map <S-k> 5k
 map <S-j> 5j 
+map <S-k> 5k
 map <S-h> <S-left>
 map <S-l> <S-right>
 
@@ -238,6 +244,13 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
+
+if empty($SSH_CONNECTION) && has('clipboard')
+ set clipboard^=unnamed                " Use vim global clipboard register
+ if has('unnamedplus') || has('nvim')  " Use system clipboard register
+   set clipboard^=unnamedplus
+ endif
+endif
 
 " Autoformat Elixir files on save
 autocmd BufWritePost *.exs silent :!mix format %
