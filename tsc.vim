@@ -17,6 +17,7 @@ call dein#add('Shougo/neosnippet-snippets')
 call dein#add('tpope/vim-fugitive')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
+call dein#add('drewtempelmeyer/palenight.vim')
 call dein#add('scrooloose/nerdtree')
 call dein#add('Xuyuanp/nerdtree-git-plugin')
 call dein#add('ervandew/supertab')
@@ -24,6 +25,8 @@ call dein#add('chriskempson/base16-vim')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('airblade/vim-gitgutter')
+call dein#add('ludovicchabant/vim-gutentags')
+call dein#add('slashmili/alchemist.vim')
 
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('Shougo/denite.nvim')
@@ -42,6 +45,7 @@ call dein#end()
 filetype plugin indent on
 
 let mapleader = " "
+
 
 " Deoplete Conf
 set completeopt-=preview
@@ -68,13 +72,22 @@ let g:netrw_winsize = 20
 let NERDTreeMinimalUI=1
 let NERDTreeIgnore = ['\.beam$']
 
+let g:alchemist_iex_term_size = 30
+let g:alchemist_tag_disable = 0
+let g:alchemist_mappings_disable = 1
+let g:alchemist_tag_disable = '<C-9>'
+let g:alchemist_compile_basepath = "/app/"
+let g:alchemist_tag_map = '<C-]>'
+let g:alchemist_tag_stack_map = '<C-T>'
+let g:alchemist#elixir_erlang_src = "/usr/local/Cellar"
+
 "Airline Config
 let g:airline_powerline_fonts = 1
 set hidden
 let g:Powerline_symbols = 'fancy'
 let g:airline_left_alt_sep = ''
 let g:airline_right_alt_sep = ''
-let g:airline_theme='onedark'
+let g:airline_theme='dracula'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#show_buffers = 0
@@ -218,7 +231,7 @@ set termguicolors     " enable true colors support
 let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 let ayucolor="dark"   " for dark version of theme
-colorscheme base16-google-dark
+colorscheme palenight
 
 " Setup for ripgrep
 command! -bang -nargs=* Rg

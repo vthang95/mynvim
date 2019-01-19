@@ -17,6 +17,8 @@ call dein#add('Shougo/neosnippet-snippets')
 call dein#add('tpope/vim-fugitive')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
+call dein#add('ludovicchabant/vim-gutentags')
+""call dein#add('soramugi/auto-ctags.vim')
 " "call dein#add('SirVer/ultisnips')
 " "call dein#add('mklabs/split-term.vim')
 " "call dein#add('Lokaltog/powerline-fonts')
@@ -97,6 +99,10 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
+
+""let g:auto_ctags = 1
+""let g:auto_ctags_tags_name = 'tags'
+""let g:auto_ctags_tags_args = ['--tag-relative=yes', '--recurse=yes', '--sort=yes', '--exclude=.git', '--languages=elixir']
 
 " "tmap <ESC> <C-\><C-n>
 tmap <leader>1  <C-\><C-n><Plug>AirlineSelectTab1
@@ -255,3 +261,5 @@ endif
 " Autoformat Elixir files on save
 autocmd BufWritePost *.exs silent :!mix format %
 autocmd BufWritePost *.ex silent :!mix format %
+
+" camelCaseToSnakeCase - %s/\(\l\)\(\u\)/\1\_\l\2/gc
