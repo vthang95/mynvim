@@ -18,6 +18,7 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
 call dein#add('drewtempelmeyer/palenight.vim')
+call dein#add('terryma/vim-multiple-cursors')
 call dein#add('scrooloose/nerdtree')
 call dein#add('Xuyuanp/nerdtree-git-plugin')
 call dein#add('ervandew/supertab')
@@ -250,3 +251,20 @@ endif
 
 autocmd FileType typescript :set makeprg=tsc
 set colorcolumn=100
+" Disable Deoplete when selecting multiple cursors starts
+function! Multiple_cursors_before()
+    if exists('*deoplete#disable')
+        exe 'call deoplete#disable()'
+    elseif exists(':NeoCompleteLock') == 2
+        exe 'NeoCompleteLock'
+    endif
+endfunction
+
+" Enable Deoplete when selecting multiple cursors ends
+function! Multiple_cursors_after()
+    if exists('*deoplete#toggle')
+        exe 'call deoplete#toggle()'
+    elseif exists(':NeoCompleteUnlock') == 2
+        exe 'NeoCompleteUnlock'
+    endif
+endfunction

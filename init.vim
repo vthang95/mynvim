@@ -20,6 +20,7 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
 call dein#add('ludovicchabant/vim-gutentags')
+call dein#add('terryma/vim-multiple-cursors')
 ""call dein#add('soramugi/auto-ctags.vim')
 " "call dein#add('SirVer/ultisnips')
 " "call dein#add('mklabs/split-term.vim')
@@ -270,3 +271,21 @@ autocmd BufWritePost *.ex silent :!mix format %
 
 " camelCaseToSnakeCase - %s/\(\l\)\(\u\)/\1\_\l\2/gc
 set colorcolumn=100
+
+" Disable Deoplete when selecting multiple cursors starts
+function! Multiple_cursors_before()
+    if exists('*deoplete#disable')
+        exe 'call deoplete#disable()'
+    elseif exists(':NeoCompleteLock') == 2
+        exe 'NeoCompleteLock'
+    endif
+endfunction
+
+" Enable Deoplete when selecting multiple cursors ends
+function! Multiple_cursors_after()
+    if exists('*deoplete#toggle')
+        exe 'call deoplete#toggle()'
+    elseif exists(':NeoCompleteUnlock') == 2
+        exe 'NeoCompleteUnlock'
+    endif
+endfunction
