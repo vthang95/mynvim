@@ -11,6 +11,8 @@ set runtimepath+=~/.nvim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin('~/.nvim/dein/')
 
 call dein#add('Shougo/dein.vim')
+call dein#add('fatih/vim-go')
+call dein#add('zchee/deoplete-go')
 call dein#add('sheerun/vim-polyglot')
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
@@ -50,6 +52,10 @@ let mapleader = " "
 
 " Js
 let g:javascript_plugin_jsdoc = 1
+
+" Golang
+let g:go_doc_keywordprg_enabled = 0
+au BufNewFile,BufRead *.go setlocal noet ts=8 sw=8 sts=8
 
 " Deoplete Conf
 set completeopt-=preview 
@@ -263,3 +269,4 @@ autocmd BufWritePost *.exs silent :!mix format %
 autocmd BufWritePost *.ex silent :!mix format %
 
 " camelCaseToSnakeCase - %s/\(\l\)\(\u\)/\1\_\l\2/gc
+set colorcolumn=100

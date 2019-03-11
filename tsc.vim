@@ -32,7 +32,7 @@ call dein#add('Shougo/deoplete.nvim')
 call dein#add('Shougo/denite.nvim')
 
 call dein#add('HerringtonDarkholme/yats.vim')
-call dein#add('mhartington/nvim-typescript', {'do': './install.sh'})
+call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 call dein#add('neomake/neomake')
 
 if dein#check_install()
@@ -249,3 +249,4 @@ if empty($SSH_CONNECTION) && has('clipboard')
 endif
 
 autocmd FileType typescript :set makeprg=tsc
+set colorcolumn=100
