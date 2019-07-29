@@ -1,5 +1,8 @@
 set nocompatible
 filetype on 
+set foldmethod=indent
+scriptencoding utf-8
+set foldlevelstart=20
 filetype plugin on
 
 if (!isdirectory(expand("$HOME/.nvim/dein/repos/github.com/Shougo/dein.vim")))
@@ -195,10 +198,14 @@ nnoremap dd "_dd
 nnoremap fw dw
 nnoremap dw "_dw
 
-map <S-j> 5j 
-map <S-k> 5k
-map <S-h> <S-left>
-map <S-l> <S-right>
+vnoremap <S-j> 5j 
+vnoremap <S-k> 5k
+vnoremap <S-h> <S-left>
+vnoremap <S-l> <S-right>
+nnoremap <S-j> 5j 
+nnoremap <S-k> 5k
+nnoremap <S-h> <S-left>
+nnoremap <S-l> <S-right>
 
 inoremap        (  ()<Left>
 inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"

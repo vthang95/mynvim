@@ -1,4 +1,6 @@
 set nocompatible
+set foldmethod=indent
+set foldlevelstart=20
 filetype on
 filetype plugin on
 
@@ -21,6 +23,7 @@ call dein#add('drewtempelmeyer/palenight.vim')
 call dein#add('terryma/vim-multiple-cursors')
 call dein#add('scrooloose/nerdtree')
 call dein#add('Xuyuanp/nerdtree-git-plugin')
+call dein#add('mattn/emmet-vim')
 call dein#add('ervandew/supertab')
 call dein#add('chriskempson/base16-vim')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
@@ -135,9 +138,7 @@ map <leader>iex :IEx<cr>
 map <leader>\ :NERDTreeToggle<CR>
 
 " Focus on NERDTree
-map <leader>, <C-w><left>
-" Blur NERDTree
-map <leader>. <C-w><right>
+map <leader>, <C-y>,
 " Remove search highlight
 map <leader>ok :noh<cr>
 map <leader>j  :m .+1<cr>==
