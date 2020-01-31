@@ -1,6 +1,8 @@
 set nocompatible
 set foldmethod=indent
 set foldlevelstart=20
+set encoding=UTF-8
+set autoread
 filetype on
 filetype plugin on
 
@@ -30,13 +32,15 @@ call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('airblade/vim-gitgutter')
 call dein#add('ludovicchabant/vim-gutentags')
-call dein#add('slashmili/alchemist.vim')
+"call dein#add('slashmili/alchemist.vim')
+call dein#add('neoclide/coc.nvim', {'merge':0, 'rev': 'release'})
+call dein#add('liuchengxu/vista.vim')
 
-call dein#add('Shougo/deoplete.nvim')
-call dein#add('Shougo/denite.nvim')
+""call dein#add('Shougo/deoplete.nvim')
+""call dein#add('Shougo/denite.nvim')
 
-call dein#add('HerringtonDarkholme/yats.vim')
-call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+"call dein#add('HerringtonDarkholme/yats.vim')
+"call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 call dein#add('neomake/neomake')
 
 if dein#check_install()
@@ -52,14 +56,23 @@ let mapleader = " "
 
 
 " Deoplete Conf
-set completeopt-=preview
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-inoremap <silent><expr><cr> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
+""set completeopt-=preview
+""let g:deoplete#enable_at_startup = 1
+""let g:deoplete#enable_smart_case = 1
+""inoremap <silent><expr><cr> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 " let g:UltiSnipsExpandTrigger="<tab>"
@@ -172,6 +185,9 @@ map # :s/^/# /g<CR>:let @/ = ""<CR>
 map <leader>'/ :s/^/" /g<CR>:let @/ = ""<CR>
 vmap <leader>'/ :s/^/" /g<CR>:let @/ = ""<CR>
 
+" Use K to show documentation in preview window
+nnoremap ? :call <SID>show_documentation()<CR>
+
 inoremap <S-Tab> <C-d>
 nnoremap <S-Tab> <<
 nnoremap <Tab> >>
@@ -213,14 +229,13 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 "     \ 'file': '\v\c\.(swf|bak|png|gif|mov|ico|jpg|pdf|jrxml)$',
 "     \}
 
-set guifont=Fira\ Code\Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 13
+set guifont=FiraCode\ Nerd\ Font\Fira\ Code\Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 13
 
 syntax on
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 set number
 set autoindent
 set smartindent
-set autoread
 set scrolloff=5
 set background=dark
 set hlsearch "highlight search
@@ -269,3 +284,6 @@ function! Multiple_cursors_after()
         exe 'NeoCompleteUnlock'
     endif
 endfunction
+
+hi CocErrorLine guifg=#000000 guibg=#D25972
+hi CocWarningLine guifg=#000000 guibg=#CBAC62
